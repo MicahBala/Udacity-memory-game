@@ -34,7 +34,7 @@ h1 {
  */
 
 .card_frame {
-  width: 40vw;
+  width: 50vw;
   height: 70vh;
   background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
   padding: 1em 1.5em;
