@@ -80,6 +80,7 @@ const add = function(targetCard) {
   targetCard.classList.add("open", "show");
   //Make sure we can only have a max of two cards in the array to check for a match
   if (openCards.length === 2) {
+    movesCounter();
     if (
       openCards[0].firstChild.className === openCards[1].firstChild.className
     ) {
@@ -104,13 +105,27 @@ const match = function() {
 
   openCards[0].classList.remove("close");
   openCards[1].classList.remove("close");
+
+  matchedCards.push(openCards[0]);
+  matchedCards.push(openCards[1]);
+
+  // console.log(matchedCards.length);
 };
 
 // function to increament move counter
-const moveCounter = function() {};
+const movesCounter = function() {
+  numberOfMoves += 1;
+  const moves = document.querySelector(".moves");
+  moves.textContent = `${numberOfMoves} Moves`;
+};
 
 // function for finished game
-const messageCongrats = function() {};
+const messageCongrats = function() {
+  // Display Summary of Moves
+  console.log(`Number of Moves: ${numberOfMoves}`);
+  // display Ratings
+  // Time taken
+};
 
 // Select the frame holding the cards
 const cards = document.querySelector(".card_frame");
@@ -118,10 +133,20 @@ const cards = document.querySelector(".card_frame");
 //   declare and empty array to store clicked cards
 let openCards = [];
 
+// declare empty array to store matched
+let matchedCards = [];
+
+// track moves
+let numberOfMoves = 1;
+
 //   Using event delegation add click event
 cards.addEventListener("click", function(evt) {
   const targetCard = evt.target;
   open(targetCard);
+  if (matchedCards.length === 2) {
+    // console.log("End of Game!!!");
+    messageCongrats();
+  }
 });
 
 buildGrid();
