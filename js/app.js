@@ -119,12 +119,20 @@ const movesCounter = function() {
   moves.textContent = `${numberOfMoves} Moves`;
 };
 
-// function for finished game
-const messageCongrats = function() {
-  // Display Summary of Moves
-  console.log(`Number of Moves: ${numberOfMoves}`);
-  // display Ratings
-  // Time taken
+// function to show modal
+const showModal = function() {
+  const sModal = document.querySelector(".bg-modal");
+  sModal.setAttribute("style", "display: flex");
+
+  const modalmoves = document.querySelector(".modal-moves");
+  modalmoves.textContent = `Moves: ${numberOfMoves}`;
+  // console.log(`Number of Moves: ${numberOfMoves}`);
+};
+
+// function to hide modal
+const hideModal = function() {
+  const hModal = documen.querySelector(".close-modal");
+  hModal.setAttribute("style", "display: none");
 };
 
 // Select the frame holding the cards
@@ -133,19 +141,22 @@ const cards = document.querySelector(".card_frame");
 //   declare and empty array to store clicked cards
 let openCards = [];
 
-// declare empty array to store matched
+// declare empty array to store matched cards
 let matchedCards = [];
 
 // track moves
-let numberOfMoves = 1;
+let numberOfMoves = 0;
 
-//   Using event delegation add click event
-cards.addEventListener("click", function(evt) {
+//   Using event delegation add click event on the frame holding the cards
+cards.addEventListener("click", function _listener(evt) {
   const targetCard = evt.target;
   open(targetCard);
+
   if (matchedCards.length === 2) {
-    // console.log("End of Game!!!");
-    messageCongrats();
+    setTimeout(function() {
+      cards.removeEventListener("click", _listener);
+      showModal();
+    }, 2000);
   }
 });
 

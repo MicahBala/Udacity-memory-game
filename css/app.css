@@ -106,6 +106,49 @@ h1 {
 }
 
 /*
+ * Styles for the Modal
+ */
+
+.bg-modal {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  display: none;
+}
+
+.modal-content {
+  width: 40%;
+  height: 300px;
+  background-color: #02ccba;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  color: #fff;
+  position: relative;
+}
+
+.close-modal {
+  padding: 5px 12px;
+  border-radius: 4px;
+  border: 1px solid #fff;
+  color: #fff;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.close-modal:hover {
+  background-color: #fff;
+  color: #02ccba;
+}
+
+/*
  * Styles for the Footer
  */
 
