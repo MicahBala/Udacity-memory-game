@@ -59,7 +59,7 @@ function buildGrid() {
 
 // function to display card once clicked
 const open = function(targetCard) {
-  //   wnat to be sure we are clicking on an element that represents a card
+  //   want to be sure we are clicking on an element that represents a card
   if (targetCard.nodeName.toLowerCase() === "li") {
     // want to be sure that the card we are clicking is not having the classes open, show and match
     if (
@@ -126,13 +126,46 @@ const showModal = function() {
 
   const modalmoves = document.querySelector(".modal-moves");
   modalmoves.textContent = `Moves: ${numberOfMoves}`;
-  // console.log(`Number of Moves: ${numberOfMoves}`);
+
+  const modalClock = document.querySelector(".modal-time");
+  modalClock.textContent = `Time: ${timeMinutes}:${timeSeconds}`;
 };
 
 // function to hide modal
 const hideModal = function() {
   const hModal = documen.querySelector(".close-modal");
   hModal.setAttribute("style", "display: none");
+};
+
+// function to start the clock
+const startClock = function() {
+  // let time = 0;
+  clockId = setInterval(function() {
+    time++;
+    // console.log(time);
+    // function to print time on page
+    pageClock();
+  }, 1000);
+};
+
+// function to stop the clock
+const stopClock = function() {
+  clearInterval(clockId);
+};
+
+// function to show clock on page
+const pageClock = function() {
+  const timer = document.querySelector(".time");
+  timeMinutes = Math.floor(time / 60);
+  timeSeconds = time % 60;
+
+  if (time < 10) {
+    // console.log(`Time: 00:0${timeSeconds}`);
+    timer.textContent = `Time: 00:0${timeSeconds}`;
+  } else {
+    // console.log(`Time: 0${timeMinutes}:${timeSeconds}`);
+    timer.textContent = `Time: 0${timeMinutes}:${timeSeconds}`;
+  }
 };
 
 // Select the frame holding the cards
@@ -147,12 +180,22 @@ let matchedCards = [];
 // track moves
 let numberOfMoves = 0;
 
+let clockId;
+let time = 0;
+let timeMinutes;
+let timeSeconds;
+
 //   Using event delegation add click event on the frame holding the cards
 cards.addEventListener("click", function _listener(evt) {
   const targetCard = evt.target;
   open(targetCard);
 
+  // Number of matched cards determines the end of the game
+  // After which the modal dialogue box will be displayed
   if (matchedCards.length === 2) {
+    stopClock();
+    // console.log(time);
+    // function to print time on modal
     setTimeout(function() {
       cards.removeEventListener("click", _listener);
       showModal();
@@ -161,3 +204,5 @@ cards.addEventListener("click", function _listener(evt) {
 });
 
 buildGrid();
+// start the clock as soon as the DOM loads
+startClock();
