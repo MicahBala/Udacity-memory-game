@@ -6,6 +6,12 @@
 // Select the frame holding the cards
 const cards = document.querySelector(".card_frame");
 
+// For Moves counter function
+const moves = document.querySelector(".moves");
+
+// For fiveStar function
+const clearStars = document.querySelector(".stars");
+
 //   declare and empty array to store clicked cards
 let openCards = [];
 
@@ -19,6 +25,7 @@ let clockId;
 let time = 0;
 let timeMinutes;
 let timeSeconds;
+const timer = document.querySelector(".time");
 
 let starRating;
 let rateValue;
@@ -145,7 +152,7 @@ const match = function() {
 // function to increament move counter
 const movesCounter = function() {
   numberOfMoves += 1;
-  const moves = document.querySelector(".moves");
+  // const moves = document.querySelector(".moves");
   moves.textContent = `${numberOfMoves} Moves`;
 
   gameRating();
@@ -169,13 +176,12 @@ const showModal = function() {
       // console.log("3 stars");
       stars[0].setAttribute("style", "display: none");
       stars[1].setAttribute("style", "display: none");
-    } else if (rateValue === 2) {
+    }
+    if (rateValue === 2) {
       // console.log("2 stars");
       stars[0].setAttribute("style", "display: none");
       stars[1].setAttribute("style", "display: none");
       stars[2].setAttribute("style", "display: none");
-    } else {
-      console.log("5 stars");
     }
   }
 };
@@ -202,7 +208,7 @@ const stopClock = function() {
 
 // function to show clock on page
 const pageClock = function() {
-  const timer = document.querySelector(".time");
+  // const timer = document.querySelector(".time");
   timeMinutes = Math.floor(time / 60);
   timeSeconds = time % 60;
 
@@ -220,21 +226,63 @@ const gameRating = function() {
   starRating = document.querySelectorAll(".rating");
   for (let i = 0; i < starRating.length; i++) {
     if (numberOfMoves > 8) {
-      starRating[0].setAttribute("style", "display: none");
-      starRating[1].setAttribute("style", "display: none");
+      starRating[0].setAttribute("style", "visibility: hidden");
+      starRating[1].setAttribute("style", "visibility: hidden");
 
       rateValue = 3;
     }
 
     if (numberOfMoves > 12) {
-      starRating[0].setAttribute("style", "display: none");
-      starRating[1].setAttribute("style", "display: none");
-      starRating[2].setAttribute("style", "display: none");
+      starRating[0].setAttribute("style", "visibility: hidden");
+      starRating[1].setAttribute("style", "visibility: hidden");
+      starRating[2].setAttribute("style", "visibility: hidden");
 
       rateValue = 2;
     }
   }
 };
+
+// funtion to build star rating
+const fiveStars = function() {
+  for (let i = 0; i < 5; i++) {
+    const star = document.createElement("li");
+
+    const picture = document.createElement("i");
+    picture.setAttribute("class", "fa fa-star rating");
+    picture.setAttribute("style", "padding-left: 5px;");
+
+    star.appendChild(picture);
+
+    clearStars.appendChild(star);
+  }
+};
+
+// Reset the game
+const resetButton = document.querySelector(".reset");
+resetButton.addEventListener("click", function() {
+  while (cards.hasChildNodes()) {
+    cards.removeChild(cards.lastChild);
+  }
+
+  while (clearStars.hasChildNodes()) {
+    clearStars.removeChild(clearStars.lastChild);
+  }
+
+  openCards = [];
+  matchedCards = [];
+  numberOfMoves = 0;
+  moves.textContent = `${numberOfMoves} Moves`;
+
+  timeMinutes = 0;
+  timeSeconds = 0;
+  time = 0;
+
+  timer.textContent = `Time: 0${timeMinutes}:0${timeSeconds}`;
+
+  // startClock();
+  fiveStars();
+  buildGrid();
+});
 
 //   Using event delegation add click event on the frame holding the cards
 cards.addEventListener("click", function _listener(evt) {
