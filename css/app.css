@@ -21,7 +21,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 90%;
+  width: 80%;
 }
 
 h1 {
@@ -83,7 +83,7 @@ h1 {
 
 .score-panel {
   text-align: left;
-  width: 345px;
+  width: 48%;
   margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
@@ -94,11 +94,13 @@ h1 {
   padding: 0;
   display: inline-block;
   margin: 0 5px 0 0;
+  color: yellowgreen;
 }
 
 .score-panel .stars li {
   list-style: none;
   display: inline-block;
+  padding-top: 0;
 }
 
 .score-panel .reset {
@@ -124,7 +126,7 @@ h1 {
 }
 
 .modal-content {
-  width: 40%;
+  width: 45%;
   height: 300px;
   background-color: #02ccba;
   border-radius: 10px;
@@ -146,6 +148,17 @@ h1 {
 .close-modal:hover {
   background-color: #fff;
   color: #02ccba;
+}
+
+.modalrate {
+  display: flex;
+  justify-content: center;
+}
+
+.modalrate .stars {
+  display: flex;
+  list-style: none;
+  color: yellow;
 }
 
 /*

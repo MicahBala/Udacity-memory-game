@@ -1,19 +1,27 @@
-// Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
-  var currentIndex = array.length,
-    temporaryValue,
-    randomIndex;
+/*
+===================================================
+* Global variables and constants
+===================================================
+*/
+// Select the frame holding the cards
+const cards = document.querySelector(".card_frame");
 
-  while (currentIndex !== 0) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
+//   declare and empty array to store clicked cards
+let openCards = [];
 
-  return array;
-}
+// declare empty array to store matched cards
+let matchedCards = [];
+
+// track moves
+let numberOfMoves = 0;
+
+let clockId;
+let time = 0;
+let timeMinutes;
+let timeSeconds;
+
+let starRating;
+let rateValue;
 
 // Array holding fontawesome icons
 const pictureArr = [
@@ -36,8 +44,30 @@ const pictureArr = [
 ];
 
 /*
-function to Build Grid of cards dynamically.
+* =======================================================
+* Functions
+* =======================================================
 */
+
+// Shuffle function from http://stackoverflow.com/a/2450976
+function shuffle(array) {
+  var currentIndex = array.length,
+    temporaryValue,
+    randomIndex;
+
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+// function to Build Grid of cards dynamically.
+
 function buildGrid() {
   const docFragment = document.createDocumentFragment();
   shuffle(pictureArr); //Returns a shuffled array of pictures
@@ -117,6 +147,8 @@ const movesCounter = function() {
   numberOfMoves += 1;
   const moves = document.querySelector(".moves");
   moves.textContent = `${numberOfMoves} Moves`;
+
+  gameRating();
 };
 
 // function to show modal
@@ -129,6 +161,23 @@ const showModal = function() {
 
   const modalClock = document.querySelector(".modal-time");
   modalClock.textContent = `Time: ${timeMinutes}:${timeSeconds}`;
+
+  // show ratings here
+  const stars = document.querySelectorAll(".modalRating");
+  for (let i = 0; i < stars.length; i++) {
+    if (rateValue === 3) {
+      // console.log("3 stars");
+      stars[0].setAttribute("style", "display: none");
+      stars[1].setAttribute("style", "display: none");
+    } else if (rateValue === 2) {
+      // console.log("2 stars");
+      stars[0].setAttribute("style", "display: none");
+      stars[1].setAttribute("style", "display: none");
+      stars[2].setAttribute("style", "display: none");
+    } else {
+      console.log("5 stars");
+    }
+  }
 };
 
 // function to hide modal
@@ -142,8 +191,6 @@ const startClock = function() {
   // let time = 0;
   clockId = setInterval(function() {
     time++;
-    // console.log(time);
-    // function to print time on page
     pageClock();
   }, 1000);
 };
@@ -168,22 +215,26 @@ const pageClock = function() {
   }
 };
 
-// Select the frame holding the cards
-const cards = document.querySelector(".card_frame");
+// Game rating function
+const gameRating = function() {
+  starRating = document.querySelectorAll(".rating");
+  for (let i = 0; i < starRating.length; i++) {
+    if (numberOfMoves > 8) {
+      starRating[0].setAttribute("style", "display: none");
+      starRating[1].setAttribute("style", "display: none");
 
-//   declare and empty array to store clicked cards
-let openCards = [];
+      rateValue = 3;
+    }
 
-// declare empty array to store matched cards
-let matchedCards = [];
+    if (numberOfMoves > 12) {
+      starRating[0].setAttribute("style", "display: none");
+      starRating[1].setAttribute("style", "display: none");
+      starRating[2].setAttribute("style", "display: none");
 
-// track moves
-let numberOfMoves = 0;
-
-let clockId;
-let time = 0;
-let timeMinutes;
-let timeSeconds;
+      rateValue = 2;
+    }
+  }
+};
 
 //   Using event delegation add click event on the frame holding the cards
 cards.addEventListener("click", function _listener(evt) {
@@ -192,10 +243,10 @@ cards.addEventListener("click", function _listener(evt) {
 
   // Number of matched cards determines the end of the game
   // After which the modal dialogue box will be displayed
-  if (matchedCards.length === 2) {
+  if (matchedCards.length === 16) {
     stopClock();
-    // console.log(time);
-    // function to print time on modal
+    gameRating();
+
     setTimeout(function() {
       cards.removeEventListener("click", _listener);
       showModal();
@@ -203,6 +254,10 @@ cards.addEventListener("click", function _listener(evt) {
   }
 });
 
+/* ====================================
+* Game Starts Here
+* =====================================
+*/
+// Build grid and start the clock as soon as the DOM loads
 buildGrid();
-// start the clock as soon as the DOM loads
 startClock();
