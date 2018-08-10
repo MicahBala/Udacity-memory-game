@@ -21,7 +21,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 80%;
+  width: 100%;
 }
 
 h1 {
@@ -83,7 +83,7 @@ h1 {
 
 .score-panel {
   text-align: left;
-  width: 48%;
+  width: 35%;
   margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
@@ -168,4 +168,31 @@ h1 {
 footer {
   font-weight: bold;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/*
+ * Media Queries
+ */
+@media screen and (max-width: 900px) {
+  .card_frame {
+    /* width: 50vw; */
+    height: 50vh;
+    padding: 0.5em 1em;
+    margin: 0 0 1.5em;
+  }
+
+  .score-panel {
+    /* text-align: left; */
+    width: 48%;
+    font-size: 12px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    /* display: flex; */
+    /* justify-content: space-between; */
+  }
+
+  .card_frame .card {
+    height: calc((100% / 4) - 5px);
+    width: calc((100% / 4) - 5px);
+  }
 }
