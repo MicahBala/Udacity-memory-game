@@ -298,7 +298,7 @@ cards.addEventListener("click", function _listener(evt) {
     setTimeout(function() {
       cards.removeEventListener("click", _listener);
       showModal();
-    }, 2000);
+    }, 1000);
   }
 });
 
