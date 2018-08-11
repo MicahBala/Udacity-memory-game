@@ -1,3 +1,5 @@
+"use strict";
+
 /*
 ===================================================
 * Global variables and constants
@@ -58,9 +60,9 @@ const pictureArr = [
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-  var currentIndex = array.length,
-    temporaryValue,
-    randomIndex;
+  let currentIndex = array.length;
+  let temporaryValue;
+  let randomIndex;
 
   while (currentIndex !== 0) {
     randomIndex = Math.floor(Math.random() * currentIndex);
@@ -78,7 +80,8 @@ function shuffle(array) {
 function buildGrid() {
   const docFragment = document.createDocumentFragment();
   shuffle(pictureArr); //Returns a shuffled array of pictures
-  for (pict of pictureArr) {
+  // for (const pict of pictureArr) {
+  pictureArr.forEach(function(pict) {
     const cards = document.createElement("li");
 
     const picture = document.createElement("i");
@@ -88,7 +91,7 @@ function buildGrid() {
     cards.classList.add("card", "close");
 
     docFragment.appendChild(cards);
-  }
+  });
 
   const cardsFrame = document.querySelector(".card_frame");
   cardsFrame.appendChild(docFragment);
@@ -98,13 +101,15 @@ function buildGrid() {
 const open = function(targetCard) {
   //   want to be sure we are clicking on an element that represents a card
   if (targetCard.nodeName.toLowerCase() === "li") {
-    // want to be sure that the card we are clicking is not having the classes open, show and match
+    // want to be sure that the card we are clicking is
+    // not having the classes open, show and match
     if (
       !targetCard.classList.contains("open") &&
       !targetCard.classList.contains("show") &&
       !targetCard.classList.contains("match")
     ) {
-      // Add clicked card into the openCards array and add classes show, and open to them
+      // Add clicked card into the openCards array and add
+      // classes show, and open to them
       add(targetCard);
     }
   }
@@ -115,7 +120,8 @@ const open = function(targetCard) {
 const add = function(targetCard) {
   openCards.push(targetCard);
   targetCard.classList.add("open", "show");
-  //Make sure we can only have a max of two cards in the array to check for a match
+  //Make sure we can only have a max of two cards in
+  // the array to check for a match
   if (openCards.length === 2) {
     movesCounter();
     if (
