@@ -35,22 +35,17 @@ let rateValue;
 // Array holding fontawesome icons
 const pictureArr = [
   "fa fa-bicycle",
-  "fa fa-bicycle",
-  "fa fa-bomb",
   "fa fa-bomb",
   "fa fa-hourglass",
-  "fa fa-hourglass",
-  "fa fa-twitter",
   "fa fa-twitter",
   "fa fa-facebook-f",
-  "fa fa-facebook-f",
-  "fa fa-leaf",
   "fa fa-leaf",
   "fa fa-android",
-  "fa fa-android",
-  "fa fa-anchor",
   "fa fa-anchor"
 ];
+
+// Doubles the Array
+pictureArr.push(...pictureArr);
 
 /*
 * =======================================================
