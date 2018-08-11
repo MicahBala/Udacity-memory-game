@@ -4,16 +4,6 @@
 
 This game is part of the Udacity Project for the completion of the Froned Web Development Nanodegree. The game is developed using HTML, CSS and Pure JavaScript.
 
-## Acknowledgements
-
-AS A part of the guide to developing the game, i consulted:
-
-- Mentors on the Udacity Classroom
-- Fellow course mates
-- Shuffle function from http://stackoverflow.com/a/2450976 provided the shuffle function i used to shuffle the cards
-- FEND Memory Game Walk Through with Mike Wales on https://www.youtube.com/watch?v=_rUH-sEs68Y
-- https://www.diigo.com/outliner/fii42b/Udacity-Memory-Game-Project?key=dwj0y5x9cw
-
 ## Game Logic
 
 There are 16 shuffled Cards arranged on a deck, clicking a card will flip the card open. User can only flip two cards at a time. If the picture on the flipped cards match, the two cards stay opened, and if they dont match, the cards automatically flips back to hide the pictures on them, either of the two conditions is counted as a single move by the moves counter at the top of the deck, while a timer keeps track of the time as you preogress in the game.
@@ -31,3 +21,17 @@ To win the game, keep clicking until you have been able to match the cards on th
 ## READY? LET'S PLAY!
 
 - [The Udacity Memory Game](https://MicahBala.github.io).
+
+## Acknowledgements
+
+AS A part of the guide to developing the game, i consulted:
+
+- Mentors on the Udacity Classroom
+- Fellow course mates
+- Shuffle function from http://stackoverflow.com/a/2450976 provided the shuffle function i used to shuffle the cards
+- FEND Memory Game Walk Through with Mike Wales on https://www.youtube.com/watch?v=_rUH-sEs68Y
+- https://www.diigo.com/outliner/fii42b/Udacity-Memory-Game-Project?key=dwj0y5x9cw
+
+## Author
+
+- Micah Yunana Bala
