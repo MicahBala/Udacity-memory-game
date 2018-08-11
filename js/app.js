@@ -172,16 +172,14 @@ const showModal = function() {
   // show ratings here
   const stars = document.querySelectorAll(".modalRating");
   for (let i = 0; i < stars.length; i++) {
-    if (rateValue === 3) {
-      // console.log("3 stars");
-      stars[0].setAttribute("style", "display: none");
-      stars[1].setAttribute("style", "display: none");
-    }
     if (rateValue === 2) {
       // console.log("2 stars");
       stars[0].setAttribute("style", "display: none");
+    }
+    if (rateValue === 1) {
+      // console.log("2 stars");
+      stars[0].setAttribute("style", "display: none");
       stars[1].setAttribute("style", "display: none");
-      stars[2].setAttribute("style", "display: none");
     }
   }
 };
@@ -225,26 +223,24 @@ const pageClock = function() {
 const gameRating = function() {
   starRating = document.querySelectorAll(".rating");
   for (let i = 0; i < starRating.length; i++) {
-    if (numberOfMoves > 8) {
-      starRating[0].setAttribute("style", "visibility: hidden");
-      starRating[1].setAttribute("style", "visibility: hidden");
-
-      rateValue = 3;
-    }
-
     if (numberOfMoves > 12) {
       starRating[0].setAttribute("style", "visibility: hidden");
-      starRating[1].setAttribute("style", "visibility: hidden");
-      starRating[2].setAttribute("style", "visibility: hidden");
 
       rateValue = 2;
+    }
+
+    if (numberOfMoves > 16) {
+      starRating[0].setAttribute("style", "visibility: hidden");
+      starRating[1].setAttribute("style", "visibility: hidden");
+
+      rateValue = 1;
     }
   }
 };
 
 // funtion to build star rating
 const fiveStars = function() {
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 3; i++) {
     const star = document.createElement("li");
 
     const picture = document.createElement("i");
